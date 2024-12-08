@@ -27,7 +27,7 @@ select count(*) from film where length > (select AVG(length) from film);
 ### Задание 3
 
 ```
- select top 1 * from (select date_format(payment_date, '%Y-%m') month as month, sum(amount) sumPerMonth from payment group by date_format(payment_date, '%Y-%m') order by sumPerMonth desc) s order by s.month desc;
+ select date_format(p.payment_date, '%Y-%m') month, count(r.rental_id) rentCount from payment p inner join rental r on p.rental_id=r.rental_id group by date_format(p.payment_date, '%Y-%m') order by rentCount desc limit 1;
 ```
 
 ![3](https://github.com/lizaMosiyash/12-04/blob/master/screenshots/3.PNG)
